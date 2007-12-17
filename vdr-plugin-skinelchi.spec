@@ -21,7 +21,6 @@ Source:		vdr-%plugin-%version%prever.tar.bz2
 %else
 Source:		vdr-%plugin-%version.tar.bz2
 %endif
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	vdr-devel >= 1.4.1-6
 BuildRequires:	libMagick-devel
 Requires:	vdr-abi = %vdr_abi

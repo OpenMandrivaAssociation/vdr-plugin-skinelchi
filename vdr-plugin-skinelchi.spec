@@ -3,7 +3,7 @@
 %define name	vdr-plugin-%plugin
 %define version	0.1.1
 %define prever	pre2
-%define rel	4
+%define rel	5
 
 Summary:	VDR plugin: Elchi VDR Skin-Plugin
 Name:		%name
@@ -21,8 +21,15 @@ Source:		vdr-%plugin-%version%prever.tar.bz2
 %else
 Source:		vdr-%plugin-%version.tar.bz2
 %endif
+Patch0:		skinelchi-0.1.1pre2-i18n-1.6.patch
+# dpatches from e-tobi
+Patch1:		03_const-warning-fixes.dpatch
+Patch2:		90_vdr-skinelchi-0.1.1pre2.PatchCollection.dpatch
+Patch3:		91_skinelchi-0.1.1pre2-1.5.0.dpatch
+Patch4:		92_vdr-skinelchi-0.1.1_pre2-vdr-1.5.5-getfont.dpatch
+Patch5:		93_vdr-1.5.15.dpatch
 BuildRoot:	%{_tmppath}/%{name}-buildroot
-BuildRequires:	vdr-devel >= 1.4.1-6
+BuildRequires:	vdr-devel >= 1.6.0
 BuildRequires:	libMagick-devel
 Requires:	vdr-abi = %vdr_abi
 
@@ -40,6 +47,13 @@ VDR skin plugin, based on:
 %else
 %setup -q -n %plugin-%version
 %endif
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%vdr_plugin_prep
 
 perl -pi -e 's,/video/epgimages,%{_vdr_plugin_cachedir}/epgimages,' setup.c skinelchi.c
 
@@ -58,6 +72,7 @@ cat > README.install.urpmi <<EOF
 EOF
 
 %build
+VDR_PLUGIN_FLAGS="%vdr_plugin_flags $(pkg-config --cflags Magick++)"
 %vdr_plugin_build HAVE_IMAGEMAGICK=1
 
 %install

@@ -72,7 +72,7 @@ cat > README.install.urpmi <<EOF
 EOF
 
 %build
-VDR_PLUGIN_FLAGS="%vdr_plugin_flags $(pkg-config --cflags Magick++)"
+VDR_PLUGIN_FLAGS="%vdr_plugin_flags $(pkg-config --cflags ImageMagick++)"
 %vdr_plugin_build HAVE_IMAGEMAGICK=1
 
 %install

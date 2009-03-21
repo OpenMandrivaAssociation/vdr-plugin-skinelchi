@@ -28,6 +28,8 @@ Patch2:		90_vdr-skinelchi-0.1.1pre2.PatchCollection.dpatch
 Patch3:		91_skinelchi-0.1.1pre2-1.5.0.dpatch
 Patch4:		92_vdr-skinelchi-0.1.1_pre2-vdr-1.5.5-getfont.dpatch
 Patch5:		93_vdr-1.5.15.dpatch
+
+Patch6:		skinelchi-format-string.patch
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	vdr-devel >= 1.6.0
 BuildRequires:	libMagick-devel
@@ -53,6 +55,7 @@ VDR skin plugin, based on:
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 %vdr_plugin_prep
 
 perl -pi -e 's,/video/epgimages,%{_vdr_plugin_cachedir}/epgimages,' setup.c skinelchi.c

@@ -3,7 +3,7 @@
 %define name	vdr-plugin-%plugin
 %define version	0.1.1
 %define prever	pre2
-%define rel	8
+%define rel	9
 
 Summary:	VDR plugin: Elchi VDR Skin-Plugin
 Name:		%name

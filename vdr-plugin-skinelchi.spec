@@ -31,7 +31,7 @@ Patch5:		93_vdr-1.5.15.dpatch
 
 Patch6:		skinelchi-format-string.patch
 BuildRoot:	%{_tmppath}/%{name}-buildroot
-BuildRequires:	vdr-devel >= 1.6.0
+BuildRequires:	vdr-devel >= 1.6.0-7
 BuildRequires:	libMagick-devel
 Requires:	vdr-abi = %vdr_abi
 
@@ -75,7 +75,7 @@ cat > README.install.urpmi <<EOF
 EOF
 
 %build
-VDR_PLUGIN_FLAGS="%vdr_plugin_flags $(pkg-config --cflags ImageMagick++)"
+VDR_PLUGIN_EXTRA_FLAGS="$(pkg-config --cflags ImageMagick++)"
 %vdr_plugin_build HAVE_IMAGEMAGICK=1
 
 %install

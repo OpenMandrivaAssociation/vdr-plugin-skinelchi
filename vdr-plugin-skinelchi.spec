@@ -3,7 +3,7 @@
 %define name	vdr-plugin-%plugin
 %define version	0.1.1
 %define prever	pre2
-%define rel	9
+%define rel	10
 
 Summary:	VDR plugin: Elchi VDR Skin-Plugin
 Name:		%name
@@ -22,6 +22,8 @@ Source:		vdr-%plugin-%version%prever.tar.bz2
 Source:		vdr-%plugin-%version.tar.bz2
 %endif
 Patch0:		skinelchi-0.1.1pre2-i18n-1.6.patch
+# warning: cannot pass objects of non-POD type ‘class cString’ through ‘...’; call will abort at runtime
+Patch7:		skinelchi-non-pod-type.patch
 # dpatches from e-tobi
 Patch1:		03_const-warning-fixes.dpatch
 Patch2:		90_vdr-skinelchi-0.1.1pre2.PatchCollection.dpatch
@@ -56,6 +58,7 @@ VDR skin plugin, based on:
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 %vdr_plugin_prep
 
 perl -pi -e 's,/video/epgimages,%{_vdr_plugin_cachedir}/epgimages,' setup.c skinelchi.c

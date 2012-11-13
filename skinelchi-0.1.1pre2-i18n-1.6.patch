@@ -1,0 +1,2044 @@
+
+This is a semi-automatically created i18n adaptation patch and may contain
+errors (such as missing translations). This should only be used as a
+temporary measure until the upstream plugin maintainer fixes the plugin
+properly according to the instructions in i18n-to-gettext.pl.
+
+Created for Mandriva Linux packaging by Anssi Hannula <anssi@mandriva.org>.
+
+
+Index: skinelchi-0.1.1pre2/DisplayMenu.c
+===================================================================
+--- skinelchi-0.1.1pre2/DisplayMenu.c
++++ skinelchi-0.1.1pre2/DisplayMenu.c	2008-04-24 23:47:05.000000000 +0300
+@@ -12,7 +12,7 @@
+ #endif
+ 
+ #include "DisplayMenu.h"
+-#include "i18n.h"
++
+ #include "vdrstatus.h"
+ 
+ #ifdef VIDEOSTATUS
+Index: skinelchi-0.1.1pre2/DisplayVolume.c
+===================================================================
+--- skinelchi-0.1.1pre2/DisplayVolume.c
++++ skinelchi-0.1.1pre2/DisplayVolume.c	2008-04-24 23:47:05.000000000 +0300
+@@ -1,4 +1,4 @@
+-#include "i18n.h"
++
+ #include "DisplayVolume.h"
+ #include "setup.h"
+ #if VDRVERSNUM >= 10332
+Index: skinelchi-0.1.1pre2/Makefile
+===================================================================
+--- skinelchi-0.1.1pre2/Makefile
++++ skinelchi-0.1.1pre2/Makefile	2008-04-24 23:47:05.000000000 +0300
+@@ -79,7 +79,7 @@
+ ifdef HAVE_IMAGEMAGICK
+ OBJS = bitmap.o
+ endif
+-OBJS += i18n.o setup.o
++OBJS +=  setup.o
+ ifdef VIDEOSTATUS
+ OBJS += videostatus.o
+ endif
+@@ -99,9 +99,34 @@
+ 
+ -include $(DEPFILE)
+ 
++### Internationalization (I18N):
++
++PODIR     = po
++LOCALEDIR = $(VDRDIR)/locale
++I18Npo    = $(wildcard $(PODIR)/*.po)
++I18Nmsgs  = $(addprefix $(LOCALEDIR)/, $(addsuffix /LC_MESSAGES/vdr-$(PLUGIN).mo, $(notdir $(foreach file, $(I18Npo), $(basename $(file))))))
++I18Npot   = $(PODIR)/$(PLUGIN).pot
++
++%.mo: %.po
++	msgfmt -c -o $@ $<
++
++$(I18Npot): $(wildcard *.[ch] *.[ch]xx *.cc *.[ch]pp *.hh)
++	xgettext -C -cTRANSLATORS --no-wrap --no-location -k -ktr -ktrNOOP --msgid-bugs-address='<http://qa.mandriva.com/>' -o $@ $^
++
++%.po: $(I18Npot)
++	msgmerge -U --no-wrap --no-location --backup=none -q $@ $<
++	@touch $@
++
++$(I18Nmsgs): $(LOCALEDIR)/%/LC_MESSAGES/vdr-$(PLUGIN).mo: $(PODIR)/%.mo
++	@mkdir -p $(dir $@)
++	cp $< $@
++
++.PHONY: i18n
++i18n: $(I18Nmsgs)
++
+ ### Targets:
+ 
+-all: libvdr-$(PLUGIN).so
++all: libvdr-$(PLUGIN).so i18n
+ 
+ libvdr-$(PLUGIN).so: $(OBJS)
+ #	$(CXX) $(CXXFLAGS) -shared $(OBJS) -lncurses -o $@
+@@ -118,4 +143,5 @@
+ 	@echo Distribution package created as $(PACKAGE).tgz
+ 
+ clean:
++	@-rm -f $(PODIR)/*.mo $(PODIR)/*.pot
+ 	@-rm -f $(OBJS) $(DEPFILE) *.so *.tgz core* *~
+Index: skinelchi-0.1.1pre2/i18n.c
+===================================================================
+--- skinelchi-0.1.1pre2/i18n.c
++++ skinelchi-0.1.1pre2/i18n.c	2008-04-24 23:47:05.000000000 +0300
+@@ -1,1126 +0,0 @@
+-#include "i18n.h"
+-
+-const tI18nPhrase Phrases[] = {
+-  { "all",
+-    "alle",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "kaikki",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "as skin setup",
+-    "als Einstellungen Skin",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "asetukset",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#ifdef HAVE_IMAGEMAGICK
+-  { "available",
+-    "verfügbar",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "saatavilla",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#endif
+-  { "Channel logo",
+-    "Kanal-Logo",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Kanavalogo",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "  Logos",                                                                                                                           
+-    "  Logos",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "  Hakemisto logoille",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Colors",
+-    "Farben",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Väriasetukset",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Digital",
+-    "Digital",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Digitaalinen",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Don't use 'FixedFont'",
+-    "Benutze nicht 'FixedFont'",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Älä käytä tasavälisiä kirjasimia",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Elchi (Plugin)",
+-    "Elchi (Plugin)",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Elchi (laajennos)",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Elchi VDR Skin-Plugin",
+-    "Elchi VDR Skin-Plugin",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Laajennos Elchi-ulkoasulle",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Error",
+-    "Fehler",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Virhe",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "hide",
+-    "ausblenden",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "piilota",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#ifdef HAVE_IMAGEMAGICK
+-  { "  Image directory",
+-    "  Bild-Verzeichnis",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "  Hakemisto kuville",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#endif
+-  { "Left channel",
+-    "Linker Kanal",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Vasen kanava",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#ifdef HAVE_IMAGEMAGICK
+-  { "loading",
+-    "wird geladen",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "ladataan",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "  Logos loading with",
+-    "  Logos laden mit",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "  Logojen lataus",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#endif
+-  { "Main menu entry",
+-    "Menü-Bezeichnung",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Termi päävalikossa",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Next recording",
+-    "Nächste Aufzeichnung",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#ifdef HAVE_IMAGEMAGICK
+-  { "No picture",
+-    "Kein Bild",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Ei kuvaa",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#endif
+-  { "One area (if possible)",
+-    "Ein Bildbereich (wenn möglich)",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Pyri käyttämään yhtä kuva-aluetta",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "yes (4-bit)",
+-    "ja (4-Bit)",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "kyllä (4bpp)",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "yes (8-bit in menu for epgsearch direct switching)",
+-    "ja (8-Bit im Menü für direktes Umschalten von epgsearch)",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "kyllä (8bpp)",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#ifdef HAVE_IMAGEMAGICK
+-  { "Picture",
+-    "Bild",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Kuva",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#endif
+-  { "Recording",
+-    "Aufzeichnung",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Tallenne",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Right channel",
+-    "Rechter Kanal",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Oikea kanava",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Scroll text",
+-    "Text scrollen",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#ifdef HAVE_IMAGEMAGICK
+-  { "Show pictures of epg",
+-    "EPG-Bilder anzeigen",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Näytä kuva ohjelmaoppaassa",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#endif
+-  { "show",
+-    "anzeigen",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "näytä",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Show in main menu",
+-    "Eintrag im Menü",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Näytä valinta päävalikossa",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Timer in menu",
+-    "Timer im Menü",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Näytä ajastin valikossa",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Timer-Conflict",
+-    "Timer-Konflikt",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "päällekkäisyydet",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#ifdef HAVE_IMAGEMAGICK
+-  { "  Showtime for image [s]",
+-    "  Zeit je Bild [s]",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "  Kuvan esitysaika [s]",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "  Resize use",
+-    "  Bildberechnung benutzt",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "  Kuvan sovitusalgoritmi",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "pixel algo",
+-    "Pixel-Algorithmus",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "näytteistys",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "ratio algo",
+-    "Ratio-Algorithmus",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "skaalaus",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "zoom image",
+-    "Zoomen",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "zoomaus",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#endif
+-  { "Stereo",
+-    "Stereo",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Stereo",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#ifdef VIDEOSTATUS
+-  { "  Switch VDF on replay",
+-    "  VDF bei Wiedergabe umschalten",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "  Vaihda kuvasuhdetta toistettaessa",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "symbol",
+-    "Symbol",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "symbolina",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "text",
+-    "Text",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "tekstinä",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Video status (if possible)",
+-    "Video-Status (wenn möglich)",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Kuvainformaatio",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-#endif
+-
+-  { "Video system",
+-    "Video-System",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Kuvasysteemi",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "vdr-OSD=PAL - following is for NTSC",
+-    "vdr-OSD=PAL - folgendes ist für NTSC",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "PAL",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "vdr-OSD=NTSC - following is for PAL",
+-    "vdr-OSD=NTSC - folgendes ist für PAL",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "NTSC",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Scroll text",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Käytä tekstin vieritystä",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-  { "Going to sleep in about one minute", // Don't touch this! I need this to preserve my system for crash with slepptimer-message on ChannelDisplay -> no message of this is show in ChannelDisplay
+-    "Sleep-Timer in einer Minute",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "Sammutetaan minuutin kuluttua",
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-    "",// TODO
+-#if VDRVERSNUM >= 10342
+-    "",// TODO
+-#endif
+-  },
+-    { NULL }
+-};
+Index: skinelchi-0.1.1pre2/i18n.h
+===================================================================
+--- skinelchi-0.1.1pre2/i18n.h
++++ skinelchi-0.1.1pre2/i18n.h	2008-04-24 23:47:05.000000000 +0300
+@@ -1,8 +0,0 @@
+-#ifndef __SKINELCHI_I18N_H
+-#define __SKINELCHI_I18N_H
+-
+-#include <vdr/i18n.h>
+-
+-extern const tI18nPhrase Phrases[];
+-
+-#endif // __SKINELCHI_I18N_H
+Index: skinelchi-0.1.1pre2/service.c
+===================================================================
+--- skinelchi-0.1.1pre2/service.c
++++ skinelchi-0.1.1pre2/service.c	2008-04-24 23:47:05.000000000 +0300
+@@ -2,7 +2,7 @@
+ #include "videostatus.h"
+ #include "service.h"
+ #include "setup.h"
+-#include "i18n.h"
++
+ 
+ extern int SKINVERSION;
+ cService SkinService;
+Index: skinelchi-0.1.1pre2/setup.c
+===================================================================
+--- skinelchi-0.1.1pre2/setup.c
++++ skinelchi-0.1.1pre2/setup.c	2008-04-24 23:47:05.000000000 +0300
+@@ -1,4 +1,4 @@
+-#include "i18n.h"
++
+ #include "setup.h"
+ #include <vdr/themes.h>
+ #include <vdr/device.h>
+Index: skinelchi-0.1.1pre2/skinelchi.c
+===================================================================
+--- skinelchi-0.1.1pre2/skinelchi.c
++++ skinelchi-0.1.1pre2/skinelchi.c	2008-04-24 23:47:05.000000000 +0300
+@@ -15,7 +15,7 @@
+ #include "DisplayTracks.h"
+ #include "DisplayMessage.h"
+ #include "skinelchi.h"
+-#include "i18n.h"
++
+ #include <vdr/font.h>
+ #include <vdr/osd.h>
+ #include <vdr/menu.h>
+@@ -230,7 +230,7 @@
+ #ifdef VIDEOSTATUS
+     fd_video = -1;
+ #endif
+-    RegisterI18n(Phrases);
++    
+     Theme.AddColor("clrBackground",         	0x77000066);//  0
+     Theme.AddColor("clrButtonRedFg",        	clrWhite);  //  1
+     Theme.AddColor("clrButtonRedBg",        	0xCCCC1111);//  2
+Index: skinelchi-0.1.1pre2/vdrstatus.c
+===================================================================
+--- skinelchi-0.1.1pre2/vdrstatus.c
++++ skinelchi-0.1.1pre2/vdrstatus.c	2008-04-24 23:47:05.000000000 +0300
+@@ -3,7 +3,7 @@
+ #include "videostatus.h"
+ #endif
+ #include "setup.h"
+-#include "i18n.h"
++
+ 
+ #ifdef VIDEOSTATUS
+ extern int fd_video;
+Index: skinelchi-0.1.1pre2/videostatus.c
+===================================================================
+--- skinelchi-0.1.1pre2/videostatus.c
++++ skinelchi-0.1.1pre2/videostatus.c	2008-04-24 23:47:05.000000000 +0300
+@@ -4,7 +4,7 @@
+ #include "vdrstatus.h"
+ #include "videostatus.h"
+ #include "setup.h"
+-#include "i18n.h"
++
+ 
+ #include "symbols/test/ar16943.xpm"
+ #include "symbols/test/ar169na.xpm"
+Index: skinelchi-0.1.1pre2/po/de_DE.po
+===================================================================
+--- skinelchi-0.1.1pre2/po/de_DE.po
++++ skinelchi-0.1.1pre2/po/de_DE.po	2008-04-24 23:47:05.000000000 +0300
+@@ -0,0 +1,242 @@
++# VDR skinelchi plugin language source file.
++# Copyright (C) YEAR THE VDR-skinelchi'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the VDR-skinelchi package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
++#
++msgid ""
++msgstr ""
++"Project-Id-Version: VDR-skinelchi\n"
++"Report-Msgid-Bugs-To: http://qa.mandriva.com/\n"
++"POT-Creation-Date: 2008-04-24 23:47+0300\n"
++"PO-Revision-Date: 2008-04-24 23:47+0300\n"
++"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
++"Language-Team: <vdr@linuxtv.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=ISO-8859-15\n"
++"Content-Transfer-Encoding: 8bit\n"
++
++#: DisplayChannel.c:434 DisplayChannel.c:890 DisplayChannel.c:932
++#: DisplayReplay.c:597 DisplayVolume.c:84
++msgid "Volume "
++msgstr ""
++
++#: DisplayChannel.c:805
++msgid "No audio available!"
++msgstr ""
++
++#: DisplayChannel.c:810
++msgid "Recording"
++msgstr "Aufzeichnung"
++
++#: DisplayChannel.c:812
++msgid "Recordings"
++msgstr ""
++
++#: DisplayMenu.c:415 DisplayMenu.c:417 setup.c:100
++msgid "Next recording"
++msgstr "Nächste Aufzeichnung"
++
++#: DisplayMenu.c:729
++msgid "Picture"
++msgstr "Bild"
++
++#: DisplayMenu.c:733
++msgid "loading"
++msgstr "wird geladen"
++
++#: DisplayMenu.c:741
++msgid "No picture"
++msgstr "Kein Bild"
++
++#: DisplayMenu.c:744
++msgid "available"
++msgstr "verfügbar"
++
++#: DisplayTracks.c:218 DisplayVolume.c:111
++msgid "Going to sleep in about one minute"
++msgstr "Sleep-Timer in einer Minute"
++
++#: bitmap.c:62
++msgid "Error"
++msgstr "Fehler"
++
++#: setup.c:62 setup.c:72 setup.c:78 setup.c:99 setup.c:121 setup.c:171
++#: setup.c:222 setup.c:254 setup.c:259 setup.c:261
++msgid "no"
++msgstr ""
++
++#: setup.c:67
++msgid "pixel algo"
++msgstr "Pixel-Algorithmus"
++
++#: setup.c:68
++msgid "ratio algo"
++msgstr "Ratio-Algorithmus"
++
++#: setup.c:69
++msgid "zoom image"
++msgstr "Zoomen"
++
++#: setup.c:73
++msgid "yes (4-bit)"
++msgstr "ja (4-Bit)"
++
++#: setup.c:74
++msgid "yes (8-bit in menu for epgsearch direct switching)"
++msgstr "ja (8-Bit im Menü für direktes Umschalten von epgsearch)"
++
++#: setup.c:79
++msgid "symbol"
++msgstr "Symbol"
++
++#: setup.c:80
++msgid "text"
++msgstr "Text"
++
++#: setup.c:81 setup.c:171 setup.c:263
++msgid "show"
++msgstr "anzeigen"
++
++#: setup.c:84
++msgid "vdr-OSD=PAL - following is for NTSC"
++msgstr "vdr-OSD=PAL - folgendes ist für NTSC"
++
++#: setup.c:85
++msgid "vdr-OSD=NTSC - following is for PAL"
++msgstr "vdr-OSD=NTSC - folgendes ist für PAL"
++
++#: setup.c:102
++msgid "Timer-Conflict"
++msgstr "Timer-Konflikt"
++
++#: setup.c:103
++msgid "all"
++msgstr "alle"
++
++#: setup.c:117
++msgid "Elchi VDR Skin-Plugin"
++msgstr "Elchi VDR Skin-Plugin"
++
++#: setup.c:122
++msgid "as skin setup"
++msgstr "als Einstellungen Skin"
++
++#: setup.c:171
++msgid "Channel logo"
++msgstr "Kanal-Logo"
++
++#: setup.c:183
++msgid "  Logos"
++msgstr "  Logos"
++
++#: setup.c:186
++msgid "  Logos loading with"
++msgstr "  Logos laden mit"
++
++#: setup.c:189
++msgid "    x"
++msgstr ""
++
++#: setup.c:191
++msgid "    y"
++msgstr ""
++
++#: setup.c:198
++msgid "Show pictures of epg"
++msgstr "EPG-Bilder anzeigen"
++
++#: setup.c:201
++msgid "  Showtime for image [s]"
++msgstr "  Zeit je Bild [s]"
++
++#: setup.c:204
++msgid "  Resize use"
++msgstr "  Bildberechnung benutzt"
++
++#: setup.c:209 setup.c:216
++msgid "  Image directory"
++msgstr "  Bild-Verzeichnis"
++
++#: setup.c:219 setup.c:222
++msgid "One area (if possible)"
++msgstr "Ein Bildbereich (wenn möglich)"
++
++#: setup.c:222 setup.c:254 setup.c:259 setup.c:261
++msgid "yes"
++msgstr ""
++
++#: setup.c:225
++msgid "Video system"
++msgstr "Video-System"
++
++#: setup.c:228
++msgid "Setup.OSD$Left"
++msgstr ""
++
++#: setup.c:231
++msgid "Setup.OSD$Top"
++msgstr ""
++
++#: setup.c:234
++msgid "Setup.OSD$Width"
++msgstr ""
++
++#: setup.c:237
++msgid "Setup.OSD$Height"
++msgstr ""
++
++#: setup.c:241
++msgid "Timer in menu"
++msgstr "Timer im Menü"
++
++#: setup.c:250
++msgid "Video status (if possible)"
++msgstr "Video-Status (wenn möglich)"
++
++#: setup.c:254
++msgid "  Switch VDF on replay"
++msgstr "  VDF bei Wiedergabe umschalten"
++
++#: setup.c:259
++msgid "Don't use 'FixedFont'"
++msgstr "Benutze nicht 'FixedFont'"
++
++#: setup.c:261
++msgid "Scroll text"
++msgstr ""
++
++#: setup.c:263
++msgid "Colors"
++msgstr "Farben"
++
++#: setup.c:263
++msgid "hide"
++msgstr "ausblenden"
++
++#: setup.c:276
++msgid "Show in main menu"
++msgstr "Eintrag im Menü"
++
++#: setup.c:278
++msgid "Main menu entry"
++msgstr "Menü-Bezeichnung"
++
++#: skinelchi.c:43
++msgid "Elchi (Plugin)"
++msgstr "Elchi (Plugin)"
++
++#: vdrstatus.c:203
++msgid "Digital"
++msgstr "Digital"
++
++#: vdrstatus.c:204
++msgid "Stereo"
++msgstr "Stereo"
++
++#: vdrstatus.c:205
++msgid "Left channel"
++msgstr "Linker Kanal"
++
++#: vdrstatus.c:206
++msgid "Right channel"
++msgstr "Rechter Kanal"
+Index: skinelchi-0.1.1pre2/po/fi_FI.po
+===================================================================
+--- skinelchi-0.1.1pre2/po/fi_FI.po
++++ skinelchi-0.1.1pre2/po/fi_FI.po	2008-04-24 23:47:05.000000000 +0300
+@@ -0,0 +1,242 @@
++# VDR skinelchi plugin language source file.
++# Copyright (C) YEAR THE VDR-skinelchi'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the VDR-skinelchi package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
++#
++msgid ""
++msgstr ""
++"Project-Id-Version: VDR-skinelchi\n"
++"Report-Msgid-Bugs-To: http://qa.mandriva.com/\n"
++"POT-Creation-Date: 2008-04-24 23:47+0300\n"
++"PO-Revision-Date: 2008-04-24 23:47+0300\n"
++"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
++"Language-Team: <vdr@linuxtv.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=ISO-8859-15\n"
++"Content-Transfer-Encoding: 8bit\n"
++
++#: DisplayChannel.c:434 DisplayChannel.c:890 DisplayChannel.c:932
++#: DisplayReplay.c:597 DisplayVolume.c:84
++msgid "Volume "
++msgstr ""
++
++#: DisplayChannel.c:805
++msgid "No audio available!"
++msgstr ""
++
++#: DisplayChannel.c:810
++msgid "Recording"
++msgstr "Tallenne"
++
++#: DisplayChannel.c:812
++msgid "Recordings"
++msgstr ""
++
++#: DisplayMenu.c:415 DisplayMenu.c:417 setup.c:100
++msgid "Next recording"
++msgstr ""
++
++#: DisplayMenu.c:729
++msgid "Picture"
++msgstr "Kuva"
++
++#: DisplayMenu.c:733
++msgid "loading"
++msgstr "ladataan"
++
++#: DisplayMenu.c:741
++msgid "No picture"
++msgstr "Ei kuvaa"
++
++#: DisplayMenu.c:744
++msgid "available"
++msgstr "saatavilla"
++
++#: DisplayTracks.c:218 DisplayVolume.c:111
++msgid "Going to sleep in about one minute"
++msgstr "Sammutetaan minuutin kuluttua"
++
++#: bitmap.c:62
++msgid "Error"
++msgstr "Virhe"
++
++#: setup.c:62 setup.c:72 setup.c:78 setup.c:99 setup.c:121 setup.c:171
++#: setup.c:222 setup.c:254 setup.c:259 setup.c:261
++msgid "no"
++msgstr ""
++
++#: setup.c:67
++msgid "pixel algo"
++msgstr "näytteistys"
++
++#: setup.c:68
++msgid "ratio algo"
++msgstr "skaalaus"
++
++#: setup.c:69
++msgid "zoom image"
++msgstr "zoomaus"
++
++#: setup.c:73
++msgid "yes (4-bit)"
++msgstr "kyllä (4bpp)"
++
++#: setup.c:74
++msgid "yes (8-bit in menu for epgsearch direct switching)"
++msgstr "kyllä (8bpp)"
++
++#: setup.c:79
++msgid "symbol"
++msgstr "symbolina"
++
++#: setup.c:80
++msgid "text"
++msgstr "tekstinä"
++
++#: setup.c:81 setup.c:171 setup.c:263
++msgid "show"
++msgstr "näytä"
++
++#: setup.c:84
++msgid "vdr-OSD=PAL - following is for NTSC"
++msgstr "PAL"
++
++#: setup.c:85
++msgid "vdr-OSD=NTSC - following is for PAL"
++msgstr "NTSC"
++
++#: setup.c:102
++msgid "Timer-Conflict"
++msgstr "päällekkäisyydet"
++
++#: setup.c:103
++msgid "all"
++msgstr "kaikki"
++
++#: setup.c:117
++msgid "Elchi VDR Skin-Plugin"
++msgstr "Laajennos Elchi-ulkoasulle"
++
++#: setup.c:122
++msgid "as skin setup"
++msgstr "asetukset"
++
++#: setup.c:171
++msgid "Channel logo"
++msgstr "Kanavalogo"
++
++#: setup.c:183
++msgid "  Logos"
++msgstr "  Hakemisto logoille"
++
++#: setup.c:186
++msgid "  Logos loading with"
++msgstr "  Logojen lataus"
++
++#: setup.c:189
++msgid "    x"
++msgstr ""
++
++#: setup.c:191
++msgid "    y"
++msgstr ""
++
++#: setup.c:198
++msgid "Show pictures of epg"
++msgstr "Näytä kuva ohjelmaoppaassa"
++
++#: setup.c:201
++msgid "  Showtime for image [s]"
++msgstr "  Kuvan esitysaika [s]"
++
++#: setup.c:204
++msgid "  Resize use"
++msgstr "  Kuvan sovitusalgoritmi"
++
++#: setup.c:209 setup.c:216
++msgid "  Image directory"
++msgstr "  Hakemisto kuville"
++
++#: setup.c:219 setup.c:222
++msgid "One area (if possible)"
++msgstr "Pyri käyttämään yhtä kuva-aluetta"
++
++#: setup.c:222 setup.c:254 setup.c:259 setup.c:261
++msgid "yes"
++msgstr ""
++
++#: setup.c:225
++msgid "Video system"
++msgstr "Kuvasysteemi"
++
++#: setup.c:228
++msgid "Setup.OSD$Left"
++msgstr ""
++
++#: setup.c:231
++msgid "Setup.OSD$Top"
++msgstr ""
++
++#: setup.c:234
++msgid "Setup.OSD$Width"
++msgstr ""
++
++#: setup.c:237
++msgid "Setup.OSD$Height"
++msgstr ""
++
++#: setup.c:241
++msgid "Timer in menu"
++msgstr "Näytä ajastin valikossa"
++
++#: setup.c:250
++msgid "Video status (if possible)"
++msgstr "Kuvainformaatio"
++
++#: setup.c:254
++msgid "  Switch VDF on replay"
++msgstr "  Vaihda kuvasuhdetta toistettaessa"
++
++#: setup.c:259
++msgid "Don't use 'FixedFont'"
++msgstr "Älä käytä tasavälisiä kirjasimia"
++
++#: setup.c:261
++msgid "Scroll text"
++msgstr "Käytä tekstin vieritystä"
++
++#: setup.c:263
++msgid "Colors"
++msgstr "Väriasetukset"
++
++#: setup.c:263
++msgid "hide"
++msgstr "piilota"
++
++#: setup.c:276
++msgid "Show in main menu"
++msgstr "Näytä valinta päävalikossa"
++
++#: setup.c:278
++msgid "Main menu entry"
++msgstr "Termi päävalikossa"
++
++#: skinelchi.c:43
++msgid "Elchi (Plugin)"
++msgstr "Elchi (laajennos)"
++
++#: vdrstatus.c:203
++msgid "Digital"
++msgstr "Digitaalinen"
++
++#: vdrstatus.c:204
++msgid "Stereo"
++msgstr "Stereo"
++
++#: vdrstatus.c:205
++msgid "Left channel"
++msgstr "Vasen kanava"
++
++#: vdrstatus.c:206
++msgid "Right channel"
++msgstr "Oikea kanava"
+Index: skinelchi-0.1.1pre2/po/skinelchi.pot
+===================================================================
+--- skinelchi-0.1.1pre2/po/skinelchi.pot
++++ skinelchi-0.1.1pre2/po/skinelchi.pot	2008-04-24 23:47:05.000000000 +0300
+@@ -0,0 +1,243 @@
++# SOME DESCRIPTIVE TITLE.
++# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the PACKAGE package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
++#
++#, fuzzy
++msgid ""
++msgstr ""
++"Project-Id-Version: PACKAGE VERSION\n"
++"Report-Msgid-Bugs-To: http://qa.mandriva.com/\n"
++"POT-Creation-Date: 2008-04-24 23:47+0300\n"
++"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
++"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
++"Language-Team: LANGUAGE <LL@li.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=CHARSET\n"
++"Content-Transfer-Encoding: 8bit\n"
++
++#: DisplayChannel.c:434 DisplayChannel.c:890 DisplayChannel.c:932
++#: DisplayReplay.c:597 DisplayVolume.c:84
++msgid "Volume "
++msgstr ""
++
++#: DisplayChannel.c:805
++msgid "No audio available!"
++msgstr ""
++
++#: DisplayChannel.c:810
++msgid "Recording"
++msgstr ""
++
++#: DisplayChannel.c:812
++msgid "Recordings"
++msgstr ""
++
++#: DisplayMenu.c:415 DisplayMenu.c:417 setup.c:100
++msgid "Next recording"
++msgstr ""
++
++#: DisplayMenu.c:729
++msgid "Picture"
++msgstr ""
++
++#: DisplayMenu.c:733
++msgid "loading"
++msgstr ""
++
++#: DisplayMenu.c:741
++msgid "No picture"
++msgstr ""
++
++#: DisplayMenu.c:744
++msgid "available"
++msgstr ""
++
++#: DisplayTracks.c:218 DisplayVolume.c:111
++msgid "Going to sleep in about one minute"
++msgstr ""
++
++#: bitmap.c:62
++msgid "Error"
++msgstr ""
++
++#: setup.c:62 setup.c:72 setup.c:78 setup.c:99 setup.c:121 setup.c:171
++#: setup.c:222 setup.c:254 setup.c:259 setup.c:261
++msgid "no"
++msgstr ""
++
++#: setup.c:67
++msgid "pixel algo"
++msgstr ""
++
++#: setup.c:68
++msgid "ratio algo"
++msgstr ""
++
++#: setup.c:69
++msgid "zoom image"
++msgstr ""
++
++#: setup.c:73
++msgid "yes (4-bit)"
++msgstr ""
++
++#: setup.c:74
++msgid "yes (8-bit in menu for epgsearch direct switching)"
++msgstr ""
++
++#: setup.c:79
++msgid "symbol"
++msgstr ""
++
++#: setup.c:80
++msgid "text"
++msgstr ""
++
++#: setup.c:81 setup.c:171 setup.c:263
++msgid "show"
++msgstr ""
++
++#: setup.c:84
++msgid "vdr-OSD=PAL - following is for NTSC"
++msgstr ""
++
++#: setup.c:85
++msgid "vdr-OSD=NTSC - following is for PAL"
++msgstr ""
++
++#: setup.c:102
++msgid "Timer-Conflict"
++msgstr ""
++
++#: setup.c:103
++msgid "all"
++msgstr ""
++
++#: setup.c:117
++msgid "Elchi VDR Skin-Plugin"
++msgstr ""
++
++#: setup.c:122
++msgid "as skin setup"
++msgstr ""
++
++#: setup.c:171
++msgid "Channel logo"
++msgstr ""
++
++#: setup.c:183
++msgid "  Logos"
++msgstr ""
++
++#: setup.c:186
++msgid "  Logos loading with"
++msgstr ""
++
++#: setup.c:189
++msgid "    x"
++msgstr ""
++
++#: setup.c:191
++msgid "    y"
++msgstr ""
++
++#: setup.c:198
++msgid "Show pictures of epg"
++msgstr ""
++
++#: setup.c:201
++msgid "  Showtime for image [s]"
++msgstr ""
++
++#: setup.c:204
++msgid "  Resize use"
++msgstr ""
++
++#: setup.c:209 setup.c:216
++msgid "  Image directory"
++msgstr ""
++
++#: setup.c:219 setup.c:222
++msgid "One area (if possible)"
++msgstr ""
++
++#: setup.c:222 setup.c:254 setup.c:259 setup.c:261
++msgid "yes"
++msgstr ""
++
++#: setup.c:225
++msgid "Video system"
++msgstr ""
++
++#: setup.c:228
++msgid "Setup.OSD$Left"
++msgstr ""
++
++#: setup.c:231
++msgid "Setup.OSD$Top"
++msgstr ""
++
++#: setup.c:234
++msgid "Setup.OSD$Width"
++msgstr ""
++
++#: setup.c:237
++msgid "Setup.OSD$Height"
++msgstr ""
++
++#: setup.c:241
++msgid "Timer in menu"
++msgstr ""
++
++#: setup.c:250
++msgid "Video status (if possible)"
++msgstr ""
++
++#: setup.c:254
++msgid "  Switch VDF on replay"
++msgstr ""
++
++#: setup.c:259
++msgid "Don't use 'FixedFont'"
++msgstr ""
++
++#: setup.c:261
++msgid "Scroll text"
++msgstr ""
++
++#: setup.c:263
++msgid "Colors"
++msgstr ""
++
++#: setup.c:263
++msgid "hide"
++msgstr ""
++
++#: setup.c:276
++msgid "Show in main menu"
++msgstr ""
++
++#: setup.c:278
++msgid "Main menu entry"
++msgstr ""
++
++#: skinelchi.c:43
++msgid "Elchi (Plugin)"
++msgstr ""
++
++#: vdrstatus.c:203
++msgid "Digital"
++msgstr ""
++
++#: vdrstatus.c:204
++msgid "Stereo"
++msgstr ""
++
++#: vdrstatus.c:205
++msgid "Left channel"
++msgstr ""
++
++#: vdrstatus.c:206
++msgid "Right channel"
++msgstr ""

@@ -1,0 +1,18 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 93_skinelchi-0.1.1pre2-1.5.0.dpatch by Thomas Günther <tom@toms-cafe.de>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Changes for VDR >= 1.5.0 (applicable to VDR >= 1.4.5).
+
+@DPATCH@
+--- skinelchi-0.1.1pre2/DisplayMenu.h
++++ skinelchi-0.1.1pre2/DisplayMenu.h
+@@ -27,7 +27,7 @@
+     cBitmap *bmpEpgImage;
+     bool first;
+     cTimeMs ShowTime;
+-    uint64 epgshowtime;
++    uint64_t epgshowtime;
+ #if VDRVERSNUM >= 10344
+     u_int32_t loading;
+     u_int32_t imageready;

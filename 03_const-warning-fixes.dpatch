@@ -1,0 +1,547 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 03_const-warning-fixes.dpatch by Tobias Grimm <tg@e-tobi.net>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/arrowdown.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/arrowdown.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/arrowdown.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/arrowdown.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * arrowdown_xpm[] = {
++static const char * arrowdown_xpm[] = {
+ "12 12 2 1",
+ ".	c #FFFFFF",
+ "+	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/arrowup.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/arrowup.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/arrowup.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/arrowup.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * arrowup_xpm[] = {
++static const char * arrowup_xpm[] = {
+ "12 12 2 1",
+ ".	c #FFFFFF",
+ "+	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/audio.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/audio.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/audio.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/audio.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * audio_xpm[] = {
++static const char * audio_xpm[] = {
+ "27 18 3 1",
+ " 	c None",
+ ".	c #8D8F8D",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/audioleft.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/audioleft.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/audioleft.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/audioleft.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * audioleft_xpm[] = {
++static const char * audioleft_xpm[] = {
+ "27 18 2 1",
+ ".	c #FFFFFF",
+ "+	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/audioright.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/audioright.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/audioright.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/audioright.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * audioright_xpm[] = {
++static const char * audioright_xpm[] = {
+ "27 18 2 1",
+ ".	c #FFFFFF",
+ "+	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/audiostereo.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/audiostereo.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/audiostereo.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/audiostereo.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * audiostereo_xpm[] = {
++static const char * audiostereo_xpm[] = {
+ "27 18 2 1",
+ ".	c #FFFFFF",
+ "+	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/dolbydigital.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/dolbydigital.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/dolbydigital.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/dolbydigital.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * dolbydigital_xpm[] = {
++static const char * dolbydigital_xpm[] = {
+ "27 18 3 1",
+ " 	c None",
+ ".	c #8D8F8D",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/encrypted.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/encrypted.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/encrypted.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/encrypted.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * encrypted_xpm[] = {
++static const char * encrypted_xpm[] = {
+ "27 18 3 1",
+ " 	c None",
+ ".	c #8D8F8D",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * ffwd_xpm[] = {
++static const char * ffwd_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd1.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd1.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd1.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd1.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * ffwd1_xpm[] = {
++static const char * ffwd1_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd2.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd2.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd2.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd2.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * ffwd2_xpm[] = {
++static const char * ffwd2_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd3.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd3.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd3.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd3.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * ffwd3_xpm[] = {
++static const char * ffwd3_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd4.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd4.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd4.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd4.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * ffwd4_xpm[] = {
++static const char * ffwd4_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd5.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd5.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd5.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd5.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * ffwd5_xpm[] = {
++static const char * ffwd5_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd6.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd6.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd6.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd6.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * ffwd6_xpm[] = {
++static const char * ffwd6_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd7.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd7.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd7.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd7.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * ffwd7_xpm[] = {
++static const char * ffwd7_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd8.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd8.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/ffwd8.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/ffwd8.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * ffwd8_xpm[] = {
++static const char * ffwd8_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * frew_xpm[] = {
++static const char * frew_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew1.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew1.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew1.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew1.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * frew1_xpm[] = {
++static const char * frew1_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew2.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew2.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew2.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew2.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * frew2_xpm[] = {
++static const char * frew2_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew3.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew3.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew3.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew3.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * frew3_xpm[] = {
++static const char * frew3_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew4.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew4.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew4.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew4.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * frew4_xpm[] = {
++static const char * frew4_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew5.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew5.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew5.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew5.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * frew5_xpm[] = {
++static const char * frew5_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew6.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew6.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew6.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew6.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * frew6_xpm[] = {
++static const char * frew6_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew7.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew7.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew7.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew7.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * frew7_xpm[] = {
++static const char * frew7_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew8.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew8.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/frew8.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/frew8.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * frew8_xpm[] = {
++static const char * frew8_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/mute.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/mute.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/mute.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/mute.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * mute_xpm[] = {
++static const char * mute_xpm[] = {
+ "26 20 2 1",
+ "+	c #FFFFFF",
+ ".	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/pause.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/pause.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/pause.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/pause.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * pause_xpm[] = {
++static const char * pause_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/play.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/play.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/play.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/play.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * play_xpm[] = {
++static const char * play_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/radio.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/radio.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/radio.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/radio.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * radio_xpm[] = {
++static const char * radio_xpm[] = {
+ "27 18 3 1",
+ " 	c None",
+ ".	c #8D8F8D",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/recording.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/recording.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/recording.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/recording.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * recording_xpm[] = {
++static const char * recording_xpm[] = {
+ "27 18 2 1",
+ ".	c #FFFFFF",
+ "+	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/run.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/run.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/run.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/run.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * run_xpm[] = {
++static const char * run_xpm[] = {
+ "16 16 3 1",
+ " 	c None",
+ ".	c #010400",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * sfwd_xpm[] = {
++static const char * sfwd_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd1.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd1.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd1.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd1.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * sfwd1_xpm[] = {
++static const char * sfwd1_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd2.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd2.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd2.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd2.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * sfwd2_xpm[] = {
++static const char * sfwd2_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd3.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd3.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd3.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd3.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * sfwd3_xpm[] = {
++static const char * sfwd3_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd4.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd4.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd4.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd4.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * sfwd4_xpm[] = {
++static const char * sfwd4_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd5.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd5.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd5.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd5.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * sfwd5_xpm[] = {
++static const char * sfwd5_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd6.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd6.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd6.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd6.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * sfwd6_xpm[] = {
++static const char * sfwd6_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd7.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd7.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd7.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd7.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * sfwd7_xpm[] = {
++static const char * sfwd7_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd8.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd8.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/sfwd8.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/sfwd8.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * sfwd8_xpm[] = {
++static const char * sfwd8_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * srew_xpm[] = {
++static const char * srew_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew1.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew1.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew1.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew1.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * srew1_xpm[] = {
++static const char * srew1_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew2.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew2.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew2.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew2.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * srew2_xpm[] = {
++static const char * srew2_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew3.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew3.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew3.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew3.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * srew3_xpm[] = {
++static const char * srew3_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew4.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew4.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew4.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew4.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * srew4_xpm[] = {
++static const char * srew4_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew5.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew5.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew5.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew5.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * srew5_xpm[] = {
++static const char * srew5_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew6.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew6.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew6.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew6.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * srew6_xpm[] = {
++static const char * srew6_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew7.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew7.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew7.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew7.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * srew7_xpm[] = {
++static const char * srew7_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew8.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew8.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/srew8.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/srew8.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * srew8_xpm[] = {
++static const char * srew8_xpm[] = {
+ "28 21 2 1",
+ ".	c #FFFFFF",
+ "#	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/teletext.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/teletext.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/teletext.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/teletext.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * teletext_xpm[] = {
++static const char * teletext_xpm[] = {
+ "27 18 3 1",
+ " 	c None",
+ ".	c #8D8F8D",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/time.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/time.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/time.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/time.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * time_xpm[] = {
++static const char * time_xpm[] = {
+ "16 16 3 1",
+ " 	c None",
+ ".	c #060905",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/volume.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/volume.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/volume.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/volume.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * volume_xpm[] = {
++static const char * volume_xpm[] = {
+ "28 14 2 1",
+ ".	c #FFFFFF",
+ "+	c #000000",
+diff -urNad vdr-plugin-skinelchi-0.1.1~pre2~/symbols/vps.xpm vdr-plugin-skinelchi-0.1.1~pre2/symbols/vps.xpm
+--- vdr-plugin-skinelchi-0.1.1~pre2~/symbols/vps.xpm	2008-02-19 18:53:57.000000000 +0100
++++ vdr-plugin-skinelchi-0.1.1~pre2/symbols/vps.xpm	2008-02-19 18:54:39.000000000 +0100
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * vps_xpm[] = {
++static const char * vps_xpm[] = {
+ "27 18 2 1",
+ ".	c #FFFFFF",
+ "+	c #000000",

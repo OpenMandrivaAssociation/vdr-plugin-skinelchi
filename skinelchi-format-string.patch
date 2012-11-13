@@ -1,0 +1,83 @@
+Index: skinelchi-0.1.1pre2/DisplayChannel.c
+===================================================================
+--- skinelchi-0.1.1pre2/DisplayChannel.c
++++ skinelchi-0.1.1pre2/DisplayChannel.c	2009-03-21 12:18:07.000000000 +0200
+@@ -956,7 +956,7 @@
+ 		changed = true;
+ 		if (olddate)
+ 		    free(olddate);
+-		asprintf(&olddate, date);
++		asprintf(&olddate, "%s", date);
+ 		osd->DrawText(x6 - smallfont->Width(date), y1 + lineOffset, date, Theme.Color(clrChannelDateFg), Theme.Color(clrChannelDateBg), smallfont);
+ 		}
+ #ifdef DEBUG
+Index: skinelchi-0.1.1pre2/DisplayMenu.c
+===================================================================
+--- skinelchi-0.1.1pre2/DisplayMenu.c
++++ skinelchi-0.1.1pre2/DisplayMenu.c	2009-03-21 12:19:34.000000000 +0200
+@@ -786,7 +786,7 @@
+ 	    x = x6 - x2;
+ #endif
+ 	char *s = NULL;
+-        asprintf(&s, Event->ShortText());
++        asprintf(&s, "%s", Event->ShortText());
+ 	if (isempty(Event->Description())) {
+ 	    textScroller.Set(osd, x2, y, x, y5 - y, compactspace(s), smallfont, Theme.Color(clrMenuEventShortText), bg);
+ 	    SetScrollbar();
+@@ -806,7 +806,7 @@
+         y = y4 + slh;
+ #endif
+     char *s = NULL;
+-    asprintf(&s, Event->Description());
++    asprintf(&s, "%s", Event->Description());
+     textScroller.Set(osd, x2, y, x6 - x2, y5 - y, compactspace(s), smallfont, Theme.Color(clrMenuEventDescription), bg);
+     if (s)
+ 	free(s);
+@@ -929,7 +929,7 @@
+ 	changed = true;
+ 	if (olddate)
+ 	    free (olddate);
+-	asprintf(&olddate, date);
++	asprintf(&olddate, "%s", date);
+ 	osd->DrawText(x6 - font->Width(date), y0, date, Theme.Color(clrMenuDate), Theme.Color(clrMenuTitleBg), font);
+ 	}
+ #ifdef DEBUG
+Index: skinelchi-0.1.1pre2/DisplayTracks.c
+===================================================================
+--- skinelchi-0.1.1pre2/DisplayTracks.c
++++ skinelchi-0.1.1pre2/DisplayTracks.c	2009-03-21 12:18:30.000000000 +0200
+@@ -217,7 +217,7 @@
+ 	asprintf(&text, "%s", Text);
+ 	if (!strcasecmp(text, tr("Going to sleep in about one minute"))) {
+ 	    asprintf(&text, "\"%s\" <- Sleeptimer-Message received -> not printed on screen", Text);
+-	    esyslog(text);
++	    esyslog("%s", text);
+ 	    }
+ 	else {
+ 	    message = changed = true;
+Index: skinelchi-0.1.1pre2/DisplayVolume.c
+===================================================================
+--- skinelchi-0.1.1pre2/DisplayVolume.c
++++ skinelchi-0.1.1pre2/DisplayVolume.c	2009-03-21 12:16:51.000000000 +0200
+@@ -110,7 +110,7 @@
+ 	asprintf(&text, "%s", Text);
+ 	if (!strcasecmp(text, tr("Going to sleep in about one minute"))) {
+ 	    asprintf(&text, "\"%s\" <- Sleeptimer-Message received -> not printed on screen", Text);
+-	    esyslog(text);
++	    esyslog("%s", text);
+ 	    }
+ 	else {
+ 	    message = changed = true;
+Index: skinelchi-0.1.1pre2/setup.c
+===================================================================
+--- skinelchi-0.1.1pre2/setup.c
++++ skinelchi-0.1.1pre2/setup.c	2009-03-21 12:15:12.000000000 +0200
+@@ -157,7 +157,7 @@
+ 	else if	(strcmp(Name, "usenofixedfont") == 0) usenofixedfont = atoi(Value);
+ 	else if	(strcmp(Name, "scrolling") == 0) scrolling = atoi(Value);
+ 	else if	(strcmp(Name, "hidemenu") == 0) hidemenu = atoi(Value);
+-	else if (!strcasecmp(Name, "menuentry")) snprintf(menuentry, sizeof(menuentry), Value);
++	else if (!strcasecmp(Name, "menuentry")) snprintf(menuentry, sizeof(menuentry), "%s", Value);
+ 	else return false;
+ 	return true;
+ }

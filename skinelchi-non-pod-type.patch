@@ -1,0 +1,26 @@
+Index: skinelchi-0.1.1pre2/DisplayChannel.c
+===================================================================
+--- skinelchi-0.1.1pre2/DisplayChannel.c
++++ skinelchi-0.1.1pre2/DisplayChannel.c	2009-07-28 21:53:26.349845066 +0300
+@@ -956,7 +956,7 @@
+ 		changed = true;
+ 		if (olddate)
+ 		    free(olddate);
+-		asprintf(&olddate, "%s", date);
++		asprintf(&olddate, "%s", (const char *) date);
+ 		osd->DrawText(x6 - smallfont->Width(date), y1 + lineOffset, date, Theme.Color(clrChannelDateFg), Theme.Color(clrChannelDateBg), smallfont);
+ 		}
+ #ifdef DEBUG
+Index: skinelchi-0.1.1pre2/DisplayMenu.c
+===================================================================
+--- skinelchi-0.1.1pre2/DisplayMenu.c
++++ skinelchi-0.1.1pre2/DisplayMenu.c	2009-07-28 21:52:35.173094990 +0300
+@@ -929,7 +929,7 @@
+ 	changed = true;
+ 	if (olddate)
+ 	    free (olddate);
+-	asprintf(&olddate, "%s", date);
++	asprintf(&olddate, "%s", (const char *) date);
+ 	osd->DrawText(x6 - font->Width(date), y0, date, Theme.Color(clrMenuDate), Theme.Color(clrMenuTitleBg), font);
+ 	}
+ #ifdef DEBUG

@@ -15,7 +15,7 @@ Release:	%mkrel %rel
 %endif
 Group:		Video
 License:	GPL
-URL:		http://www.vdr-portal.de/board/thread.php?threadid=41915
+URL:		https://www.vdr-portal.de/board/thread.php?threadid=41915
 %if %prever
 Source:		vdr-%plugin-%version%prever.tar.bz2
 %else
